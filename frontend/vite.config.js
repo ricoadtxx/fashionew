@@ -13,7 +13,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			"/api": {
-				target: "http://localhost:2000",
+				target: "https://fashionewbackend.vercel.app",
 			},
 		},
 	},
