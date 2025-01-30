@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import axiosInstance from "@/lib/axios";
@@ -27,7 +26,15 @@ const PeopleAlsoBought = () => {
 		fetchRecommendations();
 	}, []);
 
-	if (isLoading) return <LoadingSpinner />;
+	if (isLoading) {
+		return (
+			<div className="text-center h-screen flex flex-col justify-center items-center gap-4">
+				<div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-gray-500 mx-auto"></div>
+				<h2 className="text-zinc-900 dark:text-white mt-4">Loading...</h2>
+				<p className="text-zinc-600 dark:text-zinc-400">Please Wait</p>
+			</div>
+		);
+	}
 
 	return (
 		<div className="mt-8">
