@@ -13,7 +13,10 @@ export default defineConfig({
 	server: {
 		proxy: {
 			"/api": {
-				target: "https://fashionewbackend.vercel.app",
+				target:
+					process.env.VITE_REACT_APP_BACKEND_BASEURL || "http://localhost:2000", // Gunakan URL yang sesuai
+				changeOrigin: true,
+				secure: false,
 			},
 		},
 	},
