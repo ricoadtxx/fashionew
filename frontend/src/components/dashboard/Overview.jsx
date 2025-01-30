@@ -46,7 +46,7 @@ const Overview = () => {
 		const fetchData = async () => {
 			try {
 				const [analyticsResponse] = await Promise.all([
-					axiosInstance.get("/api/analytics"),
+					axiosInstance.get("/analytics"),
 					fetchAllUser(),
 					fetchAllProducts(),
 				]);

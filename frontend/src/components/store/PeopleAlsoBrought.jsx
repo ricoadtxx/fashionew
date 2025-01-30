@@ -12,7 +12,7 @@ const PeopleAlsoBought = () => {
 	useEffect(() => {
 		const fetchRecommendations = async () => {
 			try {
-				const res = await axiosInstance.get("/api/products/recommendations");
+				const res = await axiosInstance.get("/products/recommendations");
 				setRecommendations(res.data);
 			} catch (error) {
 				toast.error(

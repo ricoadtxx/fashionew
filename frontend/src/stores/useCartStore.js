@@ -9,7 +9,7 @@ export const useCartStore = create((set, get) => ({
 
 	getCartItems: async () => {
 		try {
-			const res = await axiosInstance.get("/api/cart");
+			const res = await axiosInstance.get("/cart");
 			set({ cart: res.data });
 			get().calculateTotals();
 		} catch (error) {
@@ -24,7 +24,7 @@ export const useCartStore = create((set, get) => ({
 
 	addToCart: async (product) => {
 		try {
-			await axiosInstance.post("/api/cart", { productId: product._id });
+			await axiosInstance.post("/cart", { productId: product._id });
 			toast.success("Product added to cart", {
 				className: "bg-green-500 text-white rounded-lg p-4 shadow-md",
 			});
@@ -49,7 +49,7 @@ export const useCartStore = create((set, get) => ({
 	},
 
 	removeFromCart: async (productId) => {
-		await axiosInstance.delete(`/api/cart`, { data: { productId } });
+		await axiosInstance.delete(`/cart`, { data: { productId } });
 		set((prevState) => ({
 			cart: prevState.cart.filter((item) => item._id !== productId),
 		}));
@@ -62,7 +62,7 @@ export const useCartStore = create((set, get) => ({
 			return;
 		}
 
-		await axiosInstance.put(`/api/cart/${productId}`, { quantity });
+		await axiosInstance.put(`/cart/${productId}`, { quantity });
 		set((prevState) => ({
 			cart: prevState.cart.map((item) =>
 				item._id === productId ? { ...item, quantity } : item

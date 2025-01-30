@@ -18,7 +18,7 @@ export const useUserStore = create((set, get) => ({
 		}
 
 		try {
-			const res = await axiosInstance.post("/api/auth/signup", {
+			const res = await axiosInstance.post("/auth/signup", {
 				name,
 				email,
 				password,
@@ -39,7 +39,7 @@ export const useUserStore = create((set, get) => ({
 		set({ loading: true });
 
 		try {
-			const res = await axiosInstance.post("/api/auth/signin", {
+			const res = await axiosInstance.post("/auth/signin", {
 				email,
 				password,
 			});
@@ -58,7 +58,7 @@ export const useUserStore = create((set, get) => ({
 
 	logout: async () => {
 		try {
-			await axiosInstance.post("/api/auth/logout");
+			await axiosInstance.post("/auth/logout");
 			set({ user: null });
 			toast.success("Berhasil logout dari akun anda", {
 				className: "bg-green-500 text-white rounded-lg p-4 shadow-md",
@@ -73,7 +73,7 @@ export const useUserStore = create((set, get) => ({
 	checkAuth: async () => {
 		set({ checkingAuth: true });
 		try {
-			const response = await axiosInstance.get("/api/auth/profile");
+			const response = await axiosInstance.get("/auth/profile");
 			set({ user: response.data, checkingAuth: false });
 		} catch (error) {
 			console.log(error.message);
@@ -87,7 +87,7 @@ export const useUserStore = create((set, get) => ({
 
 		set({ checkingAuth: true });
 		try {
-			const response = await axiosInstance.post("/api/auth/refresh-token");
+			const response = await axiosInstance.post("/auth/refresh-token");
 			set({ checkingAuth: false });
 			return response.data;
 		} catch (error) {
@@ -99,7 +99,7 @@ export const useUserStore = create((set, get) => ({
 	fetchAllUser: async () => {
 		set({ loading: true });
 		try {
-			const response = await axiosInstance.get("/api/auth/users"); // Sesuaikan dengan endpoint Anda
+			const response = await axiosInstance.get("/auth/users"); // Sesuaikan dengan endpoint Anda
 			set({ users: response.data.users, loading: false });
 		} catch (error) {
 			console.error("Error fetching users:", error);
